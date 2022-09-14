@@ -14,10 +14,8 @@ use App\Http\Controllers\BookController;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
 Route::get('/', [BookController::class, 'index']);
+
+Route::get('/books/{book}', [BookController::class, 'show']);
 
 Route::post('/create', [BookController::class, 'create']);

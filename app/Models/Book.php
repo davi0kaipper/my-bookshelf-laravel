@@ -12,7 +12,6 @@ class Book extends Model
 
     public function index()
     {
-        return (DB::table('books')->get())->toArray();
-        // return Book::latest();
+        //return (DB::table('books')->get())->toArray();
     }
 }
