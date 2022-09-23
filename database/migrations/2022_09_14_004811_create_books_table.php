@@ -22,7 +22,7 @@ return new class extends Migration
             $table->tinyInteger('is_national');
             $table->string('publisher');
             $table->text('description');
-            $table->text('cover');
+            $table->string('cover');
             $table->timestamps('created_at');
             $table->timestamps('updated_at');
         });

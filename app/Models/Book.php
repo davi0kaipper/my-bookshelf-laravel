@@ -10,8 +10,10 @@ class Book extends Model
 {
     use HasFactory;
 
-    public function index()
+    protected $guarded = [];
+
+    public function setGenreAttribute($genre)
     {
-        //return (DB::table('books')->get())->toArray();
+        $this->attributes['genre'] = implode('|', $genre);
     }
 }

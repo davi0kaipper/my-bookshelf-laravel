@@ -1,9 +1,9 @@
-<x-layout title="Listagem de Livros">
+<x-layout title="Apresentação de Livro">
     <div class="col-6 container-fluid mt-3">
         <div class="row mb-3">
             <label class="col-4 col-form-label" for="photo">Capa</label>
             <div class="col-8">
-                <img src="/upload/{{ $book->cover }}">
+                <img src="/storage/{{ $book->cover }}">
             </div>
         </div>
 

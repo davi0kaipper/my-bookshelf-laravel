@@ -3,7 +3,7 @@
         <div class='row mt-3'>
             <div class='col'>
                 <div class='mb-3'>
-                    <a href='#' class='btn btn-primary'>Cadastrar</a>
+                    <a href='/create' class='btn btn-primary'>Cadastrar</a>
                     <button id='remove_selected' class='btn btn-secondary'>Remover selecionados</button>
                     <form action="#" id='remove_form' method="post">
                         <input type='hidden' name='selected' id='selected' value=''>
@@ -33,7 +33,7 @@
                             @foreach ($books as $book)
                                 <tr>
                                     <td><input type='checkbox' class='select_item' value='{{ $book->id }}'></td>
-                                    <td><img src="/upload/{{ $book->cover }}"></td>
+                                    <td><img src="storage/{{ $book->cover }}"></td>
                                     <td>{{ $book->name }}</td>
                                     <td>{{ $book->author }}</td>
                                     <td>{{ $book->genre }}</td>
