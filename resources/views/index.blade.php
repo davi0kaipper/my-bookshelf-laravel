@@ -43,7 +43,12 @@
                                     <td>
                                         <a href='/books/{{ $book->id }}'>Ver</a>
                                         <a href='/edit/{{ $book->id }}'>Editar</a>
-                                        <a href='#'>Remover</a>
+                                        <form method="post" action="/books/{{ $book->id }}">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button class="">Remover</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

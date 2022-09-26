@@ -23,3 +23,6 @@ Route::post('/create', [BookController::class, 'store']);
 
 Route::get('/edit/{id}', [BookController::class, 'edit']);
 Route::patch('/edit/{id}', [BookController::class, 'update']);
+
+Route::delete('/books/{id}', [BookController::class, 'destroy']);
+

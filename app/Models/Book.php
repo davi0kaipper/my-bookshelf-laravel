@@ -12,11 +12,6 @@ class Book extends Model
 
     protected $guarded = [];
 
-    // public function getGenreAttribute($genre)
-    // {
-    //     $this->attributes['genre'] = explode(', ', $genre);
-    // }
-
     public function setGenreAttribute($genre)
     {
         $this->attributes['genre'] = implode(', ', $genre);
