@@ -1,5 +1,5 @@
 <x-layout title="Apresentação de Livro">
-    <div class="col-6 container-fluid mt-3">
+    <div class="col-6 container-fluid mt-3 pb-3">
         <div class="row mb-3">
             <label class="col-4 col-form-label" for="photo">Capa</label>
             <div class="col-8">

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+
 
 class BookController extends Controller
 {
@@ -50,6 +53,37 @@ class BookController extends Controller
         Book::create($attributes);
 
         return redirect('/')->with('success', 'O livro foi cadastrado!');
+    }
+
+    public function edit($id)
+    {
+        $book = Book::find($id);
+
+        if ($book === null) {
+            return redirect('/');
+        }
+
+        return view('edit', [
+            'book' => $book
+        ]);
+    }
+
+    public function update(int $id)
+    {
+        $attributes = request()->validate([
+            'name' => ['required', 'max:255', 'min:3'],
+            'author' => ['required', 'max:255', 'min:3'],
+            'number_of_pages' => ['required'],
+            'genre' => ['required'],
+            'is_national' => ['required'],
+            'publisher' => ['required', 'max:255'],
+            'description' => ['required', 'min:10']
+        ]);
+
+        $book = Book::find($id);
+        $book->update($attributes);
+
+        return redirect('/')->with('success', 'Post Updated!');
     }
 }
 

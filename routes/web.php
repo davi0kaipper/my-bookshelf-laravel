@@ -19,5 +19,7 @@ Route::get('/', [BookController::class, 'index']);
 Route::get('/books/{id}', [BookController::class, 'show']);
 
 Route::get('/create', [BookController::class, 'create']);
-
 Route::post('/create', [BookController::class, 'store']);
+
+Route::get('/edit/{id}', [BookController::class, 'edit']);
+Route::patch('/edit/{id}', [BookController::class, 'update']);

@@ -42,7 +42,7 @@
                                     <td>{{ $book->description }}</td>
                                     <td>
                                         <a href='/books/{{ $book->id }}'>Ver</a>
-                                        <a href='#'>Editar</a>
+                                        <a href='/edit/{{ $book->id }}'>Editar</a>
                                         <a href='#'>Remover</a>
                                     </td>
                                 </tr>
