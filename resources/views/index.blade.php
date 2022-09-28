@@ -5,14 +5,13 @@
                 <div class='mb-3'>
                     <a href='/create' class='btn btn-primary'>Cadastrar</a>
                     <button id='remove_selected' class='btn btn-secondary'>Remover selecionados</button>
-                    <form action="#" id='remove_form' method="post">
+                    <form action="/teste" id='remove_form' method="post">
+                        @csrf
                         <input type='hidden' name='selected' id='selected' value=''>
                     </form>
                 </div>
-                @if (! empty($flashMessage))
-                    <div class='alert alert-<?= $flashMessage['type']; ?> mb-3 text-center'>
-                        <?= $flashMessage['message']; ?>
-                    </div>
+                @if (! empty(session('success')))
+                    <x-flash/>
                 @endif
                 <table class='table'>
                     <thead>
@@ -43,11 +42,11 @@
                                     <td>
                                         <a href='/books/{{ $book->id }}'>Ver</a>
                                         <a href='/edit/{{ $book->id }}'>Editar</a>
-                                        <form method="post" action="/books/{{ $book->id }}">
+                                        <form style="display: inline" method="post" action="/books/{{ $book->id }}">
                                             @csrf
                                             @method('DELETE')
 
-                                            <button class="">Remover</button>
+                                            <button class="button-link">Remover</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -59,9 +58,11 @@
                         @endif
                     </tbody>
                 </table>
-                @if ($books->count())
-                    {{ $books->links() }}
-                @endif
+                <div class="mb-4">
+                    @if ($books->count())
+                        {{ $books->links() }}
+                    @endif
+                </div>
             </div>
         </div>
     </div>

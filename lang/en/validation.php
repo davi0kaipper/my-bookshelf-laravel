@@ -153,7 +153,7 @@ return [
 
     'custom' => [
         'attribute-name' => [
-            'rule-name' => 'custom-message',
+            'rule-name' => 'custom-message'
         ],
     ],
 
@@ -168,6 +168,13 @@ return [
     |
     */
 
-    'attributes' => [],
-
+    'attributes' => [
+        'name' => 'título',
+        'author' => 'autor',
+        'number_of_pages' => 'número de páginas',
+        'genre' => 'gênero',
+        'is_national' => 'publicação nacional',
+        'publisher' => 'editora',
+        'description' => 'descrição'
+    ],
 ];

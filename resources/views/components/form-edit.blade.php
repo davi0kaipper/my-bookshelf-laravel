@@ -1,4 +1,4 @@
-@props(['book', 'page', 'action', 'formSubmit'])
+@props(['book', 'action', 'formSubmit'])
 @php
     $genre = $book->genre;
     $genre = explode(', ', $genre);
@@ -7,24 +7,14 @@
     @csrf
     @method('PATCH')
 
-    @if ($page === 'create')
-        <div class='row mb-3'>
-            <label class='col-4 col-form-label' for='cover'>Capa</label>
-            <div class='col-8'>
-                <input type='file' name='cover' id='cover' class='form-control'>
-                <x-error name="cover"/>
-            </div>
+    <div class='row mb-3'>
+        <label class='col-4 col-form-label' for='photo'>Capa</label>
+        <div class='col-8'>
+            <img src='/storage/{{ $book->cover }}'>
+            <input type='hidden' name='cover' id='cover' value='{{ $book->cover }}'>
+            <input type='hidden' name='id' id='id' value='{{ $book->id }}'>
         </div>
-    @elseif ($page === 'edit')
-        <div class='row mb-3'>
-            <label class='col-4 col-form-label' for='photo'>Capa</label>
-            <div class='col-8'>
-                <img src='/storage/{{ $book->cover }}'>
-                <input type='hidden' name='cover' id='cover' value='{{ $book->cover }}'>
-                <input type='hidden' name='id' id='id' value='{{ $book->id }}'>
-            </div>
-        </div>
-    @endif
+    </div>
 
     <div class='row mb-3'>
         <label class='col-4 col-form-label' for='name'>Título</label>

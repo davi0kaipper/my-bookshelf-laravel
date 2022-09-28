@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -52,7 +49,7 @@ class BookController extends Controller
 
         Book::create($attributes);
 
-        return redirect('/')->with('success', 'O livro foi cadastrado!');
+        return redirect('/')->with('success', 'Livro cadastrado!');
     }
 
     public function edit($id)
@@ -83,7 +80,7 @@ class BookController extends Controller
         $book = Book::find($id);
         $book->update($attributes);
 
-        return redirect('/')->with('success', 'Post Updated!');
+        return redirect('/')->with('success', 'Livro atualizado!');
     }
 
     public function destroy(int $id)
@@ -91,7 +88,17 @@ class BookController extends Controller
         $book = Book::find($id);
         $book->delete($book);
 
-        return back()->with('success', 'Post Deleted!');
+        return back()->with('success', 'Livro removido!');
+    }
+
+    public function destroyAll()
+    {
+        $ids = explode(',', request()->all()['selected']);
+        $ids = array_map(fn($id) => $id = (int) $id, $ids);
+
+        Book::whereIn('id', $ids)->delete();
+
+        return back()->with('success', 'Livro(s) removido(s)!');
     }
 }
 
