@@ -92,6 +92,10 @@ class BookController extends Controller
 
     public function destroyAll()
     {
+        if (request('selected') === null) {
+            return redirect('/books');
+        }
+
         $ids = explode(',', request('selected'));
         $ids = array_map(fn($id) => (int) $id, $ids);
 
