@@ -1,8 +1,10 @@
 @props(['book', 'action', 'formSubmit'])
+
 @php
     $genre = $book->genre;
     $genre = explode(', ', $genre);
 @endphp
+
 <form action='{{ $action }}' method='post' enctype='multipart/form-data' class="mt-3">
     @csrf
     @method('PATCH')
@@ -27,7 +29,7 @@
     <div class='row mb-3'>
         <label class='col-4 col-form-label' for='author'>Autor(es)</label>
         <div class='col-8'>
-            <input type='text' name='author' id='author' value='{{ $book->author }}' class='form-control'>
+            <input type='text' name='author' id='author' value='{{ old('author', $book->author) }}' class='form-control'>
             <x-error name="author"/>
         </div>
     </div>
@@ -35,7 +37,7 @@
     <div class='row mb-3'>
         <label class='col-4 col-form-label' for='number_of_pages'>Número de páginas</label>
         <div class='col-8'>
-            <input type='number' name='number_of_pages' id='number_of_pages' value='{{ $book->number_of_pages }}' class='form-control'>
+            <input type='number' name='number_of_pages' id='number_of_pages' value='{{ old('number_of_pages', $book->number_of_pages) }}' class='form-control'>
             <x-error name="number_of_pages"/>
         </div>
     </div>
@@ -81,11 +83,11 @@
         <label class='col-4 col-form-label'>Publicação Nacional</label>
         <div class='col-8'>
             <div class='form-check'>
-                <input type='radio' name='is_national' id='sim' value='1' class='form-check-input' {{ $book->is_national == 1 ? 'checked' : '' }}>
+                <input type='radio' name='is_national' id='sim' value='1' class='form-check-input' {{ old('is_national', $book->is_national) == 1 ? 'checked' : '' }}>
                 <label class='form-check-label' for='sim'>Sim</label>
             </div>
             <div class='form-check'>
-                <input type='radio' name='is_national' id='nao' value='0' class='form-check-input' {{ $book->is_national == 0 ? 'checked' : '' }}>
+                <input type='radio' name='is_national' id='nao' value='0' class='form-check-input' {{ old('is_national', $book->is_national) == 0 ? 'checked' : '' }}>
                 <label class='form-check-label' for='nao'>Não</label>
             </div>
             <x-error name="is_national"/>
@@ -95,7 +97,7 @@
     <div class='row mb-3'>
         <label class='col-4 col-form-label' for='publisher'>Editora</label>
         <div class='col-8'>
-            <input type='text' name='publisher' id='publisher' value='{{ $book->publisher }}' class='form-control'>
+            <input type='text' name='publisher' id='publisher' value='{{ old('publisher', $book->publisher) }}' class='form-control'>
             <x-error name="publisher"/>
         </div>
     </div>
@@ -103,7 +105,7 @@
     <div class='row mb-3'>
         <label class='col-4 col-form-label' for='description'>Descrição</label>
         <div class='col-8'>
-            <textarea name='description' id='description' rows='4' class='form-control'>{{ $book->description }}</textarea>
+            <textarea name='description' id='description' rows='4' class='form-control'>{{ old('description', $book->description) }}</textarea>
             <x-error name="description"/>
         </div>
     </div>

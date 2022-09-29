@@ -45,7 +45,7 @@
         <div class="row mb-3">
             <label class="col-4 col-form-label" for="is_national">Publicação Nacional</label>
             <div class="col-8">
-                <input type="text" name="is_national" id="is_national" value="{{ $book->is_national ? 'Sim' : 'Não'}}" class="form-control" readonly>
+                <input type="text" name="is_national" id="is_national" value="{{ $book->is_national ? 'Sim' : 'Não' }}" class="form-control" readonly>
             </div>
         </div>
 
@@ -57,7 +57,7 @@
         </div>
 
         <div class="row d-flex">
-            <a class="btn btn-primary w-50 mx-auto" href="/" role="button">Voltar</a>
+            <a class="btn btn-primary w-50 mx-auto" href="/books" role="button">Voltar</a>
         </div>
     </div>
 </x-layout>

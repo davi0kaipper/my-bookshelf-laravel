@@ -1,26 +1,15 @@
-@props(['page', 'action', 'formSubmit'])
+@props(['action', 'formSubmit'])
 
 <form action='{{ $action }}' method='post' enctype='multipart/form-data' class="mt-3">
     @csrf
 
-    @if ($page === 'create')
-        <div class='row mb-3'>
-            <label class='col-4 col-form-label' for='cover'>Capa</label>
-            <div class='col-8'>
-                <input type='file' name='cover' id='cover' class='form-control'>
-                <x-error name="cover"/>
-            </div>
+    <div class='row mb-3'>
+        <label class='col-4 col-form-label' for='cover'>Capa</label>
+        <div class='col-8'>
+            <input type='file' name='cover' id='cover' class='form-control'>
+            <x-error name="cover"/>
         </div>
-    @elseif ($page === 'edit')
-        <div class='row mb-3'>
-            <label class='col-4 col-form-label' for='photo'>Capa</label>
-            <div class='col-8'>
-                <img src='../upload/{{ $book->cover }}'>
-                <input type='hidden' name='cover' id='cover' value='{{ $book->cover }}'>
-                <input type='hidden' name='id' id='id' value='{{ $book->id }}'>
-            </div>
-        </div>
-    @endif
+    </div>
 
     <div class='row mb-3'>
         <label class='col-4 col-form-label' for='name'>Título</label>
@@ -87,11 +76,11 @@
         <label class='col-4 col-form-label'>Publicação Nacional</label>
         <div class='col-8'>
             <div class='form-check'>
-                <input type='radio' name='is_national' id='sim' value='1' class='form-check-input' {{ old('is_national') == 1 ? 'checked' : '' }}>
+                <input type='radio' name='is_national' id='sim' value='1' class='form-check-input' {{ old('is_national') === 1 ? 'checked' : '' }}>
                 <label class='form-check-label' for='sim'>Sim</label>
             </div>
             <div class='form-check'>
-                <input type='radio' name='is_national' id='nao' value='0' class='form-check-input' {{ old('is_national') == 0 ? 'checked' : '' }}>
+                <input type='radio' name='is_national' id='nao' value='0' class='form-check-input' {{ old('is_national') === 0 ? 'checked' : '' }}>
                 <label class='form-check-label' for='nao'>Não</label>
             </div>
             <x-error name="is_national"/>
@@ -114,7 +103,7 @@
         </div>
     </div>
 
-    <div class='row d-flex'>
+    <div class='row d-flex mt-4'>
         <button type='submit' class='btn btn-primary w-50 mx-auto'>{{ $formSubmit }}</button>
     </div>
 </form>

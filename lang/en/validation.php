@@ -175,6 +175,7 @@ return [
         'genre' => 'gênero',
         'is_national' => 'publicação nacional',
         'publisher' => 'editora',
-        'description' => 'descrição'
+        'description' => 'descrição',
+        'password' => 'senha'
     ],
 ];

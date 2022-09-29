@@ -3,16 +3,18 @@
         <div class='row mt-3'>
             <div class='col'>
                 <div class='mb-3'>
-                    <a href='/create' class='btn btn-primary'>Cadastrar</a>
+                    <a href='/books/create' class='btn btn-primary'>Cadastrar</a>
                     <button id='remove_selected' class='btn btn-secondary'>Remover selecionados</button>
-                    <form action="/teste" id='remove_form' method="post">
+                    <form action="/books/batch" id='remove_form' method="post">
                         @csrf
                         <input type='hidden' name='selected' id='selected' value=''>
                     </form>
                 </div>
+
                 @if (! empty(session('success')))
-                    <x-flash/>
+                    <x-flash message="{{ session('success') }}"/>
                 @endif
+
                 <table class='table'>
                     <thead>
                         <tr>
@@ -41,7 +43,7 @@
                                     <td>{{ $book->description }}</td>
                                     <td>
                                         <a href='/books/{{ $book->id }}'>Ver</a>
-                                        <a href='/edit/{{ $book->id }}'>Editar</a>
+                                        <a href='/books/{{ $book->id }}/edit'>Editar</a>
                                         <form style="display: inline" method="post" action="/books/{{ $book->id }}">
                                             @csrf
                                             @method('DELETE')

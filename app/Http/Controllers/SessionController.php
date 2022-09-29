@@ -8,7 +8,7 @@ class SessionController extends Controller
 {
     public function create()
     {
-        return view('session');
+        return view('login.index');
     }
 
     public function store()
@@ -18,11 +18,7 @@ class SessionController extends Controller
             'password' => ['required']
         ]);
 
-        // dd($attributes);
-        // dd(auth());
         if (! auth()->attempt($attributes)) {
-            // dd(auth()->attempt($attributes));
-
             throw ValidationException::withMessages([
                 'email' => 'Suas credenciais não puderam ser verificadas.'
             ]);
@@ -30,7 +26,7 @@ class SessionController extends Controller
 
         session()->regenerate();
 
-        return redirect('/')->with('success', 'Bem vindo de volta!');
+        return redirect('/books')->with('success', 'Bem vindo de volta!');
     }
 
     public function destroy()

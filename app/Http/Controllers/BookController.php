@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
-use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
     public function index()
     {
-        return view('index', [
+        return view('books.index', [
             'books' => Book::paginate(10)
         ]);
     }
@@ -19,17 +18,17 @@ class BookController extends Controller
         $book = Book::find($id);
 
         if ($book === null) {
-            return redirect('/');
+            return redirect('/books');
         }
 
-        return view('show', [
+        return view('books.show', [
             'book' => $book
         ]);
     }
 
     public function create()
     {
-        return view('create');
+        return view('books.create');
     }
 
     public function store()
@@ -49,7 +48,7 @@ class BookController extends Controller
 
         Book::create($attributes);
 
-        return redirect('/')->with('success', 'Livro cadastrado!');
+        return redirect('/books')->with('success', 'Livro cadastrado!');
     }
 
     public function edit($id)
@@ -57,10 +56,10 @@ class BookController extends Controller
         $book = Book::find($id);
 
         if ($book === null) {
-            return redirect('/');
+            return redirect('/books');
         }
 
-        return view('edit', [
+        return view('books.edit', [
             'book' => $book
         ]);
     }
@@ -80,7 +79,7 @@ class BookController extends Controller
         $book = Book::find($id);
         $book->update($attributes);
 
-        return redirect('/')->with('success', 'Livro atualizado!');
+        return redirect('/books')->with('success', 'Livro atualizado!');
     }
 
     public function destroy(int $id)
@@ -88,17 +87,17 @@ class BookController extends Controller
         $book = Book::find($id);
         $book->delete($book);
 
-        return back()->with('success', 'Livro removido!');
+        return redirect('/books')->with('success', 'Livro removido!');
     }
 
     public function destroyAll()
     {
-        $ids = explode(',', request()->all()['selected']);
-        $ids = array_map(fn($id) => $id = (int) $id, $ids);
+        $ids = explode(',', request('selected'));
+        $ids = array_map(fn($id) => (int) $id, $ids);
 
         Book::whereIn('id', $ids)->delete();
 
-        return back()->with('success', 'Livro(s) removido(s)!');
+        return redirect('/books')->with('success', 'Livro(s) removido(s)!');
     }
 }
 
