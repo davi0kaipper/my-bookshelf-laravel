@@ -1,64 +1,365 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# My Bookshelf API Project
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Introdução
 
-## About Laravel
+Este documento explicita a estrutura da API de accesso à aplicação My Bookshelf - Laravel.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+O acesso aos entrypoints deve ser feito usando o seguinte bearer token: "4d75de08227c474188a331b04c3ff176".
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 1. Lista os Livros
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Descrição
 
-## Learning Laravel
+Este entrypoint é utilizado para listar os livros cadastrados.
+### Entrypoint
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+`GET /books`
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Requisição
 
-## Laravel Sponsors
+Sem corpo de requisição.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Respostas
 
-### Premium Partners
+#### Códigos de Resposta
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+##### `200` - ok
 
-## Contributing
+A requisição retornará o código de resposta `200` quando uma lista de livros for retornada com sucesso.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+##### Corpo da Resposta:
+```json
+[
+    {
+        "name" : "Petrus Logus - O Guardião do Tempo",
+        "author" : "Augusto Cury",
+        "number_of_pages" : 296,
+        "genre" : ["Aventura", "Fantasia"],
+        "is_national" : true,
+        "publisher" : "Benvirá",
+        "description" : "Um jovem príncipe na trajetória da justiça.",
+        "cover": "image.png",
+        "created_at": "2022-03-14T20:44:02.000000Z",
+        "updated_at": "2022-02-23T04:15:27.000000Z"
+    }
+]
+```
 
-## Code of Conduct
+##### `401` - unauthorized
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+A requisição retornará o código de resposta `401` quando a chamada for feita por um usuário não autenticado.
 
-## Security Vulnerabilities
+## 2. Obtém um livro
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Descrição
 
-## License
+Este entrypoint é utilizado para apresentar um livro cadastrado usando seu id.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Entrypoint
+
+`GET /books/{id}`
+
+### Requisição
+
+Sem corpo de requisição.
+
+### Respostas
+
+#### Códigos de Resposta
+
+##### `200` - ok
+
+A requisição retornará o código de resposta `200` quando uma instância de livro for retornada com sucesso.
+
+##### Corpo da Resposta:
+```json
+{
+    "name" : "Petrus Logus - O Guardião do Tempo",
+    "author" : "Augusto Cury",
+    "number_of_pages" : 296,
+    "genre" : ["Aventura", "Fantasia"],
+    "is_national" : true,
+    "publisher" : "Benvirá",
+    "description" : "Um jovem príncipe na trajetória da justiça.",
+    "cover": "image.png",
+    "created_at": "2022-03-14T20:44:02.000000Z",
+    "updated_at": "2022-02-23T04:15:27.000000Z"
+}
+```
+
+##### `401` - unauthorized
+
+A requisição retornará o código de resposta `401` quando a chamada for feita por um usuário não autenticado.
+
+##### `403` - forbidden
+
+A requisição retornará o código de resposta `403` quando a chamada for feita por um usuário sem permissão de acesso a esse entrypoint.
+
+##### `404` - not found
+
+A requisição retornará o código de resposta `403` quando a chamada for feita por um usuário sem permissão de acesso a esse entrypoint.
+
+## 3. Cria um livro
+
+### Descrição
+
+Este entrypoint é utilizado para cadastrar um livro.
+
+### Entrypoint
+
+`POST /books`
+
+### Requisição
+#### Corpo da Requisição
+```json
+{
+    "name" : "Petrus Logus - O Guardião do Tempo",
+    "author" : "Augusto Cury",
+    "number_of_pages" : 296,
+    "genre" : ["Aventura", "Fantasia"],
+    "is_national" : true,
+    "publisher" : "Benvirá",
+    "description" : "Um jovem príncipe na trajetória da justiça.",
+    "cover": "image.png"
+}
+```
+
+* `name` *(string)*
+  * o nome do livro
+* `author` *(string)*
+  * o nome do autor livro
+* `genre` *(array)*
+  * o gênero do livro
+* `is_national` *(boolean)*
+  * a propriedade do livro ter publicação nacional
+* `publisher` *(string)*
+  * o nome da editora de publicação
+* `description` *(string)*
+  * a descrição do livro
+* `cover` *(string)*
+  * o nome do arquivo da capa do livro
+
+### Respostas
+
+#### Códigos de Resposta
+
+##### `201` - created
+A requisição retornará o código de resposta `201` quando uma instância de livro for criada com sucesso.
+
+##### `400` - bad request
+A requisição retornará o código de resposta `400` quando houver um erro na tentiva de cadastro. Este erro terá relação com um quebra de regra de negócio.
+
+Ex.:
+
+##### Corpo da Requisição
+
+```json
+{
+    "name" : "Petrus Logus - O Guardião do Tempo",
+    "author" : "Augusto Cury",
+    "number_of_pages" : 296,
+    "genre" : ["Comédia"], //não consta na lista de gêneros pré-definidos
+    "is_national" : true,
+    "publisher" : "Benvirá",
+    "description" : "Um jovem príncipe na trajetória da justiça.",
+    "cover": "image.png"
+}
+```
+
+##### Corpo da Resposta
+
+```json
+{
+    "type": "NonExistentGenre",
+    "message": "O campo gênero contém um ou mais gêneros não cadastrados no catálogo."
+}
+```
+
+##### `401` - unauthorized
+
+A requisição retornará o código de resposta `401` quando a chamada for feita por um usuário não autenticado.
+
+##### `403` - forbidden
+
+A requisição retornará o código de resposta `403` quando a chamada for feita por um usuário sem permissão de acesso a esse entrypoint.
+
+##### `422` - unprocessable entity
+
+A requisição retornará o código de resposta `422` quando houver um erro na tentiva de cadastro. Este erro terá relação com algum erro no schema do payload.
+
+Ex.:
+
+##### Corpo da Requisição
+
+```json
+{
+    //faltando o campo "number_of_pages"
+    "name" : "Petrus Logus - O Guardião do Tempo",
+    "author" : "Augusto Cury",
+    "genre" : ["Comédia"],
+    "is_national" : "true", //string sendo passada, deveria ser boolean
+    "publisher" : "Benvirá",
+    "description" : "Um jovem príncipe na trajetória da justiça.",
+    "cover": "image.png"
+}
+```
+
+##### Corpo da Resposta
+
+```json
+{
+    "type": "ValidationError",
+    "message": "Houve um erro de validação.",
+    "errors": [
+        "O campo número de páginas é obrigatório.",
+        "O campo publicação nacional deve ser verdadeiro ou falso."
+    ]
+}
+```
+
+## 4. Atualiza um livro
+
+### Descrição
+
+Este entrypoint é utilizado para atualizar um livro cadastrado usando usando seu id.
+
+### Entrypoint
+
+`PUT /books/{id}`
+
+### Requisição
+#### Corpo da Requisição
+```json
+{
+    "name" : "Petrus Logus - O Guardião do Tempo",
+    "author" : "Augusto Cury",
+    "number_of_pages" : 296,
+    "genre" : ["Aventura", "Fantasia"],
+    "is_national" : true,
+    "publisher" : "Arqueiro", //anteriormente "Benvirá"
+    "description" : "Um jovem príncipe na trajetória da justiça.",
+    "cover": "image.png"
+}
+```
+
+* `name` *(string)*
+  * o nome do livro
+* `author` *(string)*
+  * o nome do autor livro
+* `genre` *(array)*
+  * o gênero do livro
+* `is_national` *(boolean)*
+  * a propriedade do livro ter publicação nacional
+* `publisher` *(string)*
+  * o nome da editora de publicação
+* `description` *(string)*
+  * a descrição do livro
+* `cover` *(string)*
+  * o nome do arquivo da capa do livro
+
+### Respostas
+
+#### Códigos de Resposta
+
+##### `200` - ok
+A requisição retornará o código de resposta `200` quando um livro for atualizado com sucesso.
+
+##### `400` - bad request
+A requisição retornará o código de resposta `400` quando houver um erro na tentiva de atualização do livro. Este erro terá relação com um quebra de regra de negócio.
+
+Ex.:
+
+##### Corpo da Requisição
+
+```json
+{
+    "name" : "Petrus Logus - O Guardião do Tempo",
+    "author" : "Augusto Cury",
+    "number_of_pages" : 296,
+    "genre" : ["Comédia"],
+    "is_national" : true,
+    "publisher" : "Arqueiro", //anteriormente "Benvirá"
+    "description" : "Um jovem príncipe na trajetória da justiça.",
+    "cover": "image.png"
+}
+```
+
+##### Corpo da Resposta
+
+```json
+{
+    "type": "NonExistentGenre",
+    "message": "O campo gênero contém um ou mais gêneros não cadastrados no catálogo."
+}
+```
+
+##### `401` - unauthorized
+
+A requisição retornará o código de resposta `401` quando a chamada for feita por um usuário não autenticado.
+
+##### `403` - forbidden
+
+A requisição retornará o código de resposta `403` quando a chamada for feita por um usuário sem permissão de acesso a esse entrypoint.
+
+##### `422` - unprocessable entity
+
+A requisição retornará o código de resposta `422` quando houver um erro na tentiva de atualização do livro. Este erro terá relação com algum erro no schema do payload.
+
+Ex.:
+
+##### Corpo da Requisição
+
+```json
+{
+    "name" : "Petrus Logus - O Guardião do Tempo",
+    "author" : "Augusto Cury",
+    "genre" : ["Comédia"],
+    "is_national" : "true",
+    "publisher" : "Arqueiro", //anteriormente "Benvirá"
+    "description" : "Um jovem príncipe na trajetória da justiça.",
+    "cover": "image.png"
+}
+```
+
+##### Corpo da Resposta
+
+```json
+{
+    "type": "ValidationError",
+    "message": "Houve um erro de validação.",
+    "errors": [
+        "O campo número de páginas é obrigatório.",
+        "O campo publicação nacional deve ser verdadeiro ou falso."
+    ]
+}
+```
+
+## 5. Remove um livro
+
+### Descrição
+
+Este entrypoint é utilizado para apresentar um livro cadastrado usando seu id.
+
+### Entrypoint
+
+`DELETE /books/{id}`
+
+### Requisição
+
+Sem corpo de requisição.
+
+### Respostas
+
+#### Códigos de Resposta
+
+##### `200` - ok
+
+A requisição retornará o código de resposta `200` quando houver uma tentativa de remoção.
+
+##### `401` - unauthorized
+
+A requisição retornará o código de resposta `401` quando a chamada for feita por um usuário não autenticado.
+
+##### `403` - forbidden
+
+A requisição retornará o código de resposta `403` quando a chamada for feita por um usuário sem permissão de acesso a esse entrypoint.
