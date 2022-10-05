@@ -17,7 +17,7 @@ class MustHaveBearerToken
 
     public function handle(Request $request, Closure $next)
     {
-        if ($request->bearerToken() !== "4d75de08227c474188a331b04c3ff176") {
+        if ($request->bearerToken() !== config('api.token')) {
             return response()->json([], 401);
         }
 

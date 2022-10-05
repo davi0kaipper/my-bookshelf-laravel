@@ -66,6 +66,12 @@ class ApiBookController extends Controller
 
     public function update(Request $request, int $id)
     {
+        $book = Book::find($id);
+
+        if ($book === null) {
+            return response('', 404);
+        }
+
         $payload = $request->all();
 
         try {

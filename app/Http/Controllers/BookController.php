@@ -43,7 +43,7 @@ class BookController extends Controller
             'description' => ['required', 'min:10'],
             'cover' => ['required', 'image']
         ]);
-        dd($attributes);
+
         $attributes['cover'] = request()->file('cover')->store('upload');
 
         Book::create($attributes);

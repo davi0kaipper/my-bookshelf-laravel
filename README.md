@@ -97,7 +97,7 @@ A requisição retornará o código de resposta `403` quando a chamada for feita
 
 ##### `404` - not found
 
-A requisição retornará o código de resposta `403` quando a chamada for feita por um usuário sem permissão de acesso a esse entrypoint.
+A requisição retornará o código de resposta `404` quando a chamada for feita usando um id sem livro correspondente.
 
 ## 3. Cria um livro
 
@@ -300,6 +300,10 @@ A requisição retornará o código de resposta `401` quando a chamada for feita
 ##### `403` - forbidden
 
 A requisição retornará o código de resposta `403` quando a chamada for feita por um usuário sem permissão de acesso a esse entrypoint.
+
+##### `404` - not found
+
+A requisição retornará o código de resposta `404` quando a chamada for feita usando um id sem livro correspondente.
 
 ##### `422` - unprocessable entity
 
